@@ -7,7 +7,8 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/Login.vue'),
+    meta: { isPublic: true }
   },
   {
     path: '/',
@@ -44,6 +45,13 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(!to.meta.isPublic && !sessionStorage.getItem('token')){
+    return next('/login')
+  }
+  next()
 })
 
 export default router

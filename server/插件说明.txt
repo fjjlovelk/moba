@@ -1,3 +1,6 @@
 bcrypt: 加密密码,
 cors: 跨域插件,
+inflection: 将model名从小写复数变成大写单数,实现通用CRUD
 multer: 给表单上传的文件添加某些信息
+jsonwebtoken: 生成和验证token
+http-assert: 设置报错的状态信息
