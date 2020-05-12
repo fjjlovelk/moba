@@ -14,7 +14,7 @@ module.exports = app => {
     let queryOption = {}
     if (req.Model.modelName === 'Category') {
       queryOption.populate = 'parent'
-    }
+    } 
     const list = await req.Model.find().setOptions(queryOption).limit(10)
     res.send(list)
   })

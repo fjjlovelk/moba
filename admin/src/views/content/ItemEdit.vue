@@ -37,7 +37,7 @@ export default {
     }
   },
   created() {
-    this.id && this.getCategory()
+    this.id && this.getItem()
   },
   methods: {
     afterUpload(res) {
@@ -46,43 +46,17 @@ export default {
     async save() {
       if (this.id) {
         await this.$http.put(`/rest/items/${this.id}`, this.model)
-        this.$message.success('修改分类成功')
+        this.$message.success('修改物品成功')
       } else {
         await this.$http.post('/rest/items', this.model)
-        this.$message.success('添加分类成功')
+        this.$message.success('添加物品成功')
       }
       this.$router.push('/items/list')
     },
-    async getCategory() {
+    async getItem() {
       const res = await this.$http.get(`/rest/items/${this.id}`)
       this.model = res.data
     }
   }
 }
 </script>
-
-<style>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
-</style>

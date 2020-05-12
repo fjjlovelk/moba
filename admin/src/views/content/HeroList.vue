@@ -1,16 +1,21 @@
 <template>
   <div>
-    <h1>分类列表</h1>
-    <el-table :data="categoryList" border>
+    <h1>英雄列表</h1>
+    <el-table :data="heroList" border>
       <el-table-column label="ID" prop="_id"></el-table-column>
-      <el-table-column label="上级分类" prop="parent.name"></el-table-column>
-      <el-table-column label="分类名称" prop="name"></el-table-column>
+      <el-table-column label="名称" prop="name"></el-table-column>
+      <el-table-column label="称号" prop="title"></el-table-column>
+      <el-table-column label="头像">
+        <template v-slot="scope">
+          <img :src="scope.row.avatar" style="height:3rem" />
+        </template>
+      </el-table-column>
       <el-table-column label="操作">
         <template v-slot="scope">
           <el-button
             type="primary"
             size="mini"
-            @click="$router.push(`/categories/edit/${scope.row._id}`)"
+            @click="$router.push(`/heroes/edit/${scope.row._id}`)"
           >编辑</el-button>
           <el-button type="danger" size="mini" @click="del(scope.row)">删除</el-button>
         </template>
@@ -23,26 +28,26 @@
 export default {
   data() {
     return {
-      categoryList: []
+      heroList: []
     }
   },
   created() {
-    this.getCategoryList()
+    this.getHeroList()
   },
   methods: {
-    async getCategoryList() {
-      const res = await this.$http.get('/rest/categories')
-      this.categoryList = res.data
+    async getHeroList() {
+      const res = await this.$http.get('/rest/heroes')
+      this.heroList = res.data
     },
     del(row) {
-      this.$confirm(`是否确定删除分类 "${row.name}" ?`, '提示', {
+      this.$confirm(`是否确定删除英雄 "${row.name}" ?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
         .then(async () => {
-          await this.$http.delete(`/rest/categories/${row._id}`)
-          this.getCategoryList()
+          await this.$http.delete(`/rest/heroes/${row._id}`)
+          this.getHeroList()
           this.$message.success('删除成功')
         })
         .catch(() => {

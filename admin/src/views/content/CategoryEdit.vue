@@ -57,16 +57,8 @@ export default {
     },
     async getCategoryList() {
       const res = await this.$http.get('/rest/categories')
-      for (let i in res.data) {
-        if (res.data[i].parent) {
-          res.data.splice(i, 1)
-        }
-      }
       this.parentOptions = res.data
     }
   }
 }
 </script>
-
-<style scoped>
-</style>
