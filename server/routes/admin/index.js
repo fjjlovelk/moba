@@ -1,9 +1,9 @@
 module.exports = app => {
   const express = require('express')
+  const router = express.Router({ mergeParams: true })
   const jwt = require('jsonwebtoken')
   const assert = require('http-assert')
   const AdminUser = require('../../models/AdminUser')
-  const router = express.Router({ mergeParams: true })
   const authMiddleware = require('../../middleware/auth')
   const resourceMiddleware = require('../../middleware/resource')
 
@@ -37,7 +37,7 @@ module.exports = app => {
     res.send({ status: 'ok' })
   })
 
-  // 转换model名,设置通用CRUD接口
+  // 设置通用CRUD接口
   app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
 
   // 图片上传

@@ -1,3 +1,4 @@
+// 验证权限
 module.exports = option => {
   const jwt = require('jsonwebtoken')
   const assert = require('http-assert')
