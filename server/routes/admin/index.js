@@ -62,6 +62,15 @@ module.exports = app => {
     res.send({ token })
   })
 
+  // 注册接口
+  app.post('/admin/api/logon', async (req, res) => {
+    const { username } = req.body
+    const user = await AdminUser.findOne({ username: username })
+    assert(!user, 422, '用户名已存在')
+    const model = await AdminUser.create(req.body)
+    res.send(model)
+  })
+
   // 错误处理
   app.use(async (err, req, res, next) => {
     res.status(err.status || 500).send({

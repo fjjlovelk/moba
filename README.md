@@ -15,6 +15,6 @@ express, mongoose, axios, jsonwebtoken, multer...
 
 ### 使用方法
 
-使用前请安装node和mongodb，进入server和admin文件夹，分别在命令行执行npm i，再执行npm run serve 
+使用前请安装node和mongodb，进入server和admin文件夹，分别在命令行执行npm i，再执行npm run serve，浏览器打开地址 httpp://localhost:8080 即可访问
 
 
